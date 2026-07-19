@@ -1,8 +1,15 @@
+import { useState } from "react";
 import { recipes } from "./data/recipes";
+
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
+import RecipeDetail from "./components/RecipeDetail";
+
 
 function App(){
+
+const [selectedRecipe, setSelectedRecipe] = useState(null);
+
 
 return (
 
@@ -13,51 +20,29 @@ return (
 <Navigation />
 
 
-<h2>
-🔥 Recipe Library
-</h2>
-
-
 {
-recipes.map(recipe => (
-
-<div className="recipe-card" key={recipe.id}>
-
-<h3>
-{recipe.name}
-</h3>
-
-<p>
-{recipe.category}
-</p>
-
-<p>
-{recipe.description}
-</p>
-
-</div>
-
-))
-}
-
-</div>
-
-);
+selectedRecipe ? (
 
 <div>
 
-<h1>
-👑 The Mayor BBQs
-</h1>
+<button
+onClick={() => setSelectedRecipe(null)}
+>
+⬅ Back to Recipes
+</button>
 
-<h2>
-Pitmaster Cookbook
-</h2>
 
-<p>
-Master the fire. Perfect the flavour.
-</p>
+<RecipeDetail recipe={selectedRecipe}/>
 
+</div>
+
+)
+
+:
+
+(
+
+<div>
 
 <h2>
 🔥 Recipe Library
@@ -65,32 +50,53 @@ Master the fire. Perfect the flavour.
 
 
 {
+
 recipes.map(recipe => (
 
-<div className="recipe-card" key={recipe.id}>
+<div
+
+className="recipe-card"
+
+key={recipe.id}
+
+onClick={() => setSelectedRecipe(recipe)}
+
+>
+
 
 <h3>
 {recipe.name}
 </h3>
 
+
 <p>
 {recipe.category}
 </p>
+
 
 <p>
 {recipe.description}
 </p>
 
+
 </div>
 
 ))
-}
 
+}
 
 </div>
 
 )
 
 }
+
+
+</div>
+
+);
+
+}
+
 
 export default App;
