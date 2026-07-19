@@ -12,7 +12,13 @@ function App(){
 
 const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-const [favourites, setFavourites] = useState([]);
+const const [favourites, setFavourites] = useState(() => {
+
+const saved = localStorage.getItem("favourites");
+
+return saved ? JSON.parse(saved) : [];
+
+});
 
 
 return (
