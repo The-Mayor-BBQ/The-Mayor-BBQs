@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { recipes } from "./data/recipes";
 
@@ -8,153 +8,188 @@ import RecipeDetail from "./components/RecipeDetail";
 import FavouriteButton from "./components/FavouriteButton";
 
 
-function App(){
+function App() {
 
-const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-const const [favourites, setFavourites] = useState(() => {
+  const [favourites, setFavourites] = useState(() => {
 
-const saved = localStorage.getItem("favourites");
+    const saved = localStorage.getItem("favourites");
 
-return saved ? JSON.parse(saved) : [];
+    return saved ? JSON.parse(saved) : [];
 
-});
+  });
 
 
-return (
+  useEffect(() => {
 
-<div className="app">
+    localStorage.setItem(
+      "favourites",
+      JSON.stringify(favourites)
+    );
 
-<Header />
+  }, [favourites]);
 
-<Navigation />
 
+  return (
 
-{
+    <div className="app">
 
-selectedRecipe ? (
+      <Header />
 
-<div>
+      <Navigation />
 
-<button
-onClick={() => setSelectedRecipe(null)}
->
-⬅ Back
-</button>
 
+      {
 
-<RecipeDetail 
-recipe={selectedRecipe}
-/>
+        selectedRecipe ? (
 
+          <div>
 
-<FavouriteButton
+            <button
+              onClick={() => setSelectedRecipe(null)}
+            >
+              ⬅ Back to Recipes
+            </button>
 
-recipe={selectedRecipe}
 
-favourites={favourites}
+            <RecipeDetail 
+              recipe={selectedRecipe}
+            />
 
-setFavourites={setFavourites}
 
-/>
+            <FavouriteButton
 
+              recipe={selectedRecipe}
 
-</div>
+              favourites={favourites}
 
-)
+              setFavourites={setFavourites}
 
+            />
 
-:
 
+          </div>
 
-(
 
-<div>
+        )
 
 
-<h2>
-🔥 Recipe Library
-</h2>
+        :
 
 
-{
+        (
 
-recipes.map(recipe => (
+          <div>
 
-<div
 
-className="recipe-card"
+            <h2>
+              🔥 Recipe Library
+            </h2>
 
-key={recipe.id}
 
->
+            {
 
+              recipes.map(recipe => (
 
-<h3
-onClick={() => setSelectedRecipe(recipe)}
->
+                <div
 
-{recipe.name}
+                  className="recipe-card"
 
-</h3>
+                  key={recipe.id}
 
+                >
 
-<p>
-{recipe.category}
-</p>
 
+                  <h3
 
-<p>
-{recipe.description}
-</p>
+                    onClick={() => setSelectedRecipe(recipe)}
 
+                  >
 
-<FavouriteButton
+                    {recipe.name}
 
-recipe={recipe}
+                  </h3>
 
-favourites={favourites}
 
-setFavourites={setFavourites}
+                  <p>
+                    {recipe.category}
+                  </p>
 
-/>
 
+                  <p>
+                    {recipe.description}
+                  </p>
 
-</div>
 
-))
+                  <FavouriteButton
 
-}
+                    recipe={recipe}
 
+                    favourites={favourites}
 
-<h2>
-❤️ Favourites
-</h2>
+                    setFavourites={setFavourites}
 
+                  />
 
-{
 
-favourites.map(recipe => (
+                </div>
 
-<p key={recipe.id}>
-{recipe.name}
-</p>
+              ))
 
-))
+            }
 
-}
 
+            <h2>
+              ❤️ My Favourites
+            </h2>
 
-</div>
 
-)
+            {
 
-}
+              favourites.length === 0 ? (
 
+                <p>
+                  No favourite recipes saved yet.
+                </p>
 
-</div>
+              )
 
-);
+              :
+
+              (
+
+                favourites.map(recipe => (
+
+                  <div
+
+                    className="recipe-card"
+
+                    key={recipe.id}
+
+                  >
+
+                    {recipe.name}
+
+                  </div>
+
+                ))
+
+              )
+
+            }
+
+
+          </div>
+
+        )
+
+      }
+
+
+    </div>
+
+  );
 
 }
 
