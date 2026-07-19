@@ -27,7 +27,7 @@ Master the fire. Perfect the flavour.
 {
 recipes.map(recipe => (
 
-<div key={recipe.id}>
+<div className="recipe-card" key={recipe.id}>
 
 <h3>
 {recipe.name}
