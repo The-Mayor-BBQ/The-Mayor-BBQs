@@ -1,3 +1,5 @@
+import { recipes } from "./data/recipes";
+
 function App(){
 
 return (
@@ -15,6 +17,35 @@ Pitmaster Cookbook
 <p>
 Master the fire. Perfect the flavour.
 </p>
+
+
+<h2>
+🔥 Recipe Library
+</h2>
+
+
+{
+recipes.map(recipe => (
+
+<div key={recipe.id}>
+
+<h3>
+{recipe.name}
+</h3>
+
+<p>
+{recipe.category}
+</p>
+
+<p>
+{recipe.description}
+</p>
+
+</div>
+
+))
+}
+
 
 </div>
 
