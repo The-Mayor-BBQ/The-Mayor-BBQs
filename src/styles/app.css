@@ -57,3 +57,20 @@ padding:12px 20px;
 border-radius:10px;
 
 }
+.navigation {
+
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin:20px 0;
+
+}
+.navigation button {
+
+background:#ff7b00;
+color:white;
+border:none;
+padding:10px;
+border-radius:10px;
+
+}
