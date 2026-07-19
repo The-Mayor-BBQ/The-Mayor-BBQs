@@ -1,0 +1,59 @@
+body {
+
+margin:0;
+font-family:Arial, sans-serif;
+background:#111;
+color:white;
+
+}
+
+
+.app {
+
+padding:20px;
+
+}
+
+
+h1 {
+
+font-size:36px;
+text-align:center;
+
+}
+
+
+h2 {
+
+color:#ff7b00;
+
+}
+
+
+p {
+
+line-height:1.5;
+
+}
+
+
+.recipe-card {
+
+background:#222;
+border-radius:15px;
+padding:20px;
+margin:15px 0;
+border:1px solid #444;
+
+}
+
+
+button {
+
+background:#ff7b00;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+
+}
