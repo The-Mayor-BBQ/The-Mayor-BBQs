@@ -1,8 +1,48 @@
 import { recipes } from "./data/recipes";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
 
 function App(){
 
 return (
+
+<div className="app">
+
+<Header />
+
+<Navigation />
+
+
+<h2>
+🔥 Recipe Library
+</h2>
+
+
+{
+recipes.map(recipe => (
+
+<div className="recipe-card" key={recipe.id}>
+
+<h3>
+{recipe.name}
+</h3>
+
+<p>
+{recipe.category}
+</p>
+
+<p>
+{recipe.description}
+</p>
+
+</div>
+
+))
+}
+
+</div>
+
+);
 
 <div>
 
